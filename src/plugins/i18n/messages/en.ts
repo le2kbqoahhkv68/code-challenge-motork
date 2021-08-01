@@ -1,3 +1,8 @@
+import { en as carI18nEn } from "@/modules/car/i18n";
+
 export const en = {
-  hello: "hello word",
+  common: {
+    from: "From",
+  },
+  ...carI18nEn,
 };

@@ -22,6 +22,9 @@ Even though these code has to be sent as a zip file, each user story is develope
   - `Car` module scaffolding: This application is splitted into modules. `Cars` is the unique module so far but the architecture is defined in order to be scalable.
 
 - As a user, I want to have a list of vehicle cards.
+  - Dynamic store namespaced module scaffolding. IMPORTANT NOTE: I have used the state to store the received data from the API as it's a requirement of the code test but I'd not keep that information in the state.
+  - Add `axios` and API integration.
+  - Dumb component.
 - As a user, I want to save my preferred vehicles and keep them saved if a refresh the page.
 - As a user, I want to be able to show the current KM of the vehicle.
 - As a user, I want to be able to show the current MILES of the vehicle.
