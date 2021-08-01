@@ -12,6 +12,8 @@ In this part, I explain the product development path.
 
 I've split all the requirements into user stories, and then into subtasks.
 
+Even though these code has to be sent as a zip file, each user story is developed in their specific branch following `conventional-commits`, merged into the main branch but keeping it alive.
+
 - As a developer, I want to have an initial setup with Vue.js.
 - As a user, I want to have a list of vehicle cards.
 - As a user, I want to save my preferred vehicles and keep them saved if a refresh the page.
