@@ -1,5 +1,5 @@
 <template lang="pug">
-  .car-card
+  .car-card(v-if="car" :data-id="car.id")
     .car-card__km0(v-if="car.isKm0") {{ $t("common.km0") }}
     img.car-card__image(:src="car.image")
     .car-card__header
@@ -17,6 +17,9 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Car } from "../typing/car";
 
+/**
+ * It renders a card with the data from the car property.
+ */
 @Component
 export default class CarCard extends Vue {
   @Prop()

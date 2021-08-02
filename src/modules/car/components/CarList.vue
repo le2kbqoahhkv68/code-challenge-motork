@@ -1,5 +1,5 @@
 <template lang="pug">
-  ul.car-list
+  ul.car-list(v-if="cars.length")
     li.car-list__item(v-for="car in cars" :key="car.id")
       car-card(:car="car")
 </template>
@@ -9,6 +9,9 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import { Car } from "../typing/car";
 import CarCard from "./CarCard.vue";
 
+/**
+ * It renders a list of car cards with the data from the cars property.
+ */
 @Component({
   components: {
     CarCard,

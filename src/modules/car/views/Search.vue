@@ -14,6 +14,13 @@ import CarList from "../components/CarList.vue";
 
 const car = namespace("car");
 
+/**
+ * Car / search view container.
+ *
+ * It's responsible to contain the business logic and map the state with
+ * dummy components.
+ *
+ */
 @Component({
   components: {
     CarList,
