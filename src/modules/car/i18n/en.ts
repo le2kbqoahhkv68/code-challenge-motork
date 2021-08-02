@@ -3,8 +3,5 @@ export default {
     search: {
       title: "Search page",
     },
-    card: {
-      from: "From",
-    },
   },
 };
