@@ -37,6 +37,10 @@ class CarStore extends VuexModule {
     }
   }
 
+  @Mutation setSavedCars(carsId: number[]): void {
+    this.savedCarsId = carsId;
+  }
+
   // actions
   @Action
   public getCars(): void {

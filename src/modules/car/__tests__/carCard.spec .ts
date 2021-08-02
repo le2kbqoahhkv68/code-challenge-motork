@@ -13,13 +13,17 @@ import { getCarStub } from "./stubs/car.stub";
  *
  * @returns Vue test utils CarCard Wrapper.
  */
-const getCarCardWrapper = function (overrideCar?: Partial<Car>): Wrapper<Vue> {
+const getCarCardWrapper = function (
+  overrideCar?: Partial<Car> & { saved?: boolean },
+  saved = false
+): Wrapper<Vue> {
   return mount(CarCard, {
     propsData: {
       car: {
         ...getCarStub,
         ...overrideCar,
       },
+      saved,
     },
   });
 };
@@ -88,5 +92,15 @@ describe("CarCard component", () => {
 
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find(".car-card").exists()).toBe(false);
+  });
+
+  it("contains the `.car-card--saved` class if saved is true", () => {
+    const wrapper = getCarCardWrapper({}, true);
+    expect(wrapper.classes("car-card--saved")).toBe(true);
+  });
+
+  it("doesn't contain the `.car-card--saved` class if saved is false", () => {
+    const wrapper = getCarCardWrapper({}, false);
+    expect(wrapper.classes("car-card--saved")).toBe(false);
   });
 });
