@@ -3,7 +3,7 @@
     h1 {{ $t("car.search.title") }}
     .car-search__content
       .car-search__filters
-      car-list(class="car-search__list" :cars="cars")
+      car-list(class="car-search__list" :cars="carsWithSave" @carHeartClick="saveCar")
 </template>
 
 <script lang="ts">
@@ -30,8 +30,17 @@ export default class Search extends Vue {
   @car.State
   public cars!: Car[];
 
+  @car.State
+  public savedCars!: Car[];
+
   @car.Action
   public getCars!: () => void;
+
+  @car.Mutation
+  public saveCar!: (carId: number) => void;
+
+  @car.Getter
+  public carsWithSave!: (Car & { saved: boolean })[];
 
   mounted() {
     this.getCars();

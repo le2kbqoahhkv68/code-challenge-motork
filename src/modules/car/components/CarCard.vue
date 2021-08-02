@@ -1,13 +1,16 @@
 <template lang="pug">
-  .car-card(v-if="car" :data-id="car.id")
+  .car-card(v-if="car" :data-id="car.id" :class="cssClasses")
     .car-card__km0(v-if="car.isKm0") {{ $t("common.km0") }}
     img.car-card__image(:src="car.image")
     .car-card__header
       .car-card__markmodel {{ car.make }} {{ car.model }}
       .car-card__version {{ car.version }}
-    .car-card__price
-      .car-card__price-subtitle {{ $t("common.from") }}
-      .car-card__price-amount {{ $n(car.price, 'currency') }}
+    .car-card__info
+      .car-card__price
+        .car-card__price-subtitle {{ $t("common.from") }}
+        .car-card__price-amount {{ $n(car.price, 'currency') }}
+      .car-card__heart(@click="emitHeartClick")
+        include ../../../assets/icons/heart.svg
     .car-card__detail
       .car-card__detail-year {{ car.registrationYear || "-" }}
       .car-card__detail-consumption {{ $t("common.combinedConsumption") }}: {{ car.consumption.combined}} {{ car.consumption.unitOfMeasure }}
@@ -24,6 +27,22 @@ import { Car } from "../typing/car";
 export default class CarCard extends Vue {
   @Prop()
   protected car!: Car;
+
+  @Prop({ default: false })
+  protected saved!: boolean;
+
+  protected get cssClasses(): Record<string, boolean> {
+    return {
+      "car-card--saved": this.saved,
+    };
+  }
+
+  /**
+   * It emits an event with the current car id as payload.
+   */
+  emitHeartClick(): void {
+    this.$emit("heartClick", this.car.id);
+  }
 }
 </script>
 
@@ -38,6 +57,15 @@ export default class CarCard extends Vue {
 
   & > * {
     padding: 0 $side-margin;
+  }
+
+  &--saved {
+    .car-card__heart {
+      .icon {
+        fill: $color-orange;
+        stroke: $color-orange;
+      }
+    }
   }
 
   &__km0 {
@@ -107,9 +135,36 @@ export default class CarCard extends Vue {
     white-space: nowrap;
   }
 
-  &__price {
-    margin-top: 14px;
+  &__info {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
     line-height: 16px;
+    margin-top: 14px;
+  }
+
+  &__heart {
+    align-items: center;
+    display: flex;
+    border: 1px solid $color-grey-03;
+    border-radius: 100%;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+
+    .icon {
+      fill: $color-white;
+      stroke: $color-grey-01;
+      transition: stroke 0.25s, fill 0.25s;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .icon {
+        stroke: $color-orange;
+      }
+    }
   }
 
   &__price-subtitle {

@@ -1,7 +1,7 @@
 <template lang="pug">
   ul.car-list(v-if="cars.length")
     li.car-list__item(v-for="car in cars" :key="car.id")
-      car-card(:car="car")
+      car-card(:car="car" @heartClick="emitCardHeartClick" :saved="car.saved")
 </template>
 
 <script lang="ts">
@@ -19,7 +19,14 @@ import CarCard from "./CarCard.vue";
 })
 export default class CarList extends Vue {
   @Prop({ default: [] })
-  protected cars!: Car[];
+  protected cars!: (Car & { saved?: boolean })[];
+
+  /**
+   * It emits an event with the clicked heart car id.
+   */
+  emitCardHeartClick(carId: number) {
+    this.$emit("carHeartClick", carId);
+  }
 }
 </script>
 

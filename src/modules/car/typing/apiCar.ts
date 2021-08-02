@@ -16,7 +16,7 @@ export interface ApiCar {
   homologationStandard: {
     wltp: {
       consumption: {
-        combined: string;
+        combined: number;
         unitOfMeasure: string;
       };
     };

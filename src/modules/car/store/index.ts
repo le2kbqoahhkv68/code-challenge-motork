@@ -20,11 +20,21 @@ config.rawError = true;
 class CarStore extends VuexModule {
   // state
   public cars: Car[] = [];
+  public savedCarsId: number[] = [];
 
   // mutations
   @Mutation
   public setCars(cars: Car[]): void {
     this.cars = cars;
+  }
+
+  @Mutation saveCar(carId: number): void {
+    const carIdx = this.savedCarsId.findIndex((car) => car === carId);
+    if (carIdx < 0) {
+      this.savedCarsId.push(carId);
+    } else {
+      this.savedCarsId.splice(carIdx, 1);
+    }
   }
 
   // actions
@@ -33,6 +43,14 @@ class CarStore extends VuexModule {
     apiGetCars().then((cars: Car[]) => {
       this.context.commit("setCars", cars);
     });
+  }
+
+  // getters
+  public get carsWithSave(): (Car & { saved: boolean })[] {
+    return this.cars.map((car) => ({
+      ...car,
+      saved: this.savedCarsId.includes(car.id),
+    }));
   }
 }
 
