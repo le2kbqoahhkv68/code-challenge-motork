@@ -2,8 +2,8 @@
   #car-search
     h1 {{ $t("car.search.title") }}
     .car-search__content
-      .car-search__filters
-      car-list(class="car-search__list" :cars="carsWithSave" @carHeartClick="saveCar")
+      car-filters(class="car-search__filters")
+      car-list(class="car-search__list" :cars="computedCars" @carHeartClick="saveCar")
 </template>
 
 <script lang="ts">
@@ -11,6 +11,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import { Car } from "../typing/car";
 import CarList from "../components/CarList.vue";
+import CarFilters from "../components/CarFilters.vue";
 
 const car = namespace("car");
 
@@ -24,6 +25,7 @@ const car = namespace("car");
 @Component({
   components: {
     CarList,
+    CarFilters,
   },
 })
 export default class Search extends Vue {
@@ -43,7 +45,7 @@ export default class Search extends Vue {
   public setSavedCars!: (carsId: number[]) => void;
 
   @car.Getter
-  public carsWithSave!: (Car & { saved: boolean })[];
+  public computedCars!: (Car & { saved: boolean })[];
 
   /**
    * It stores the saved cars list in the `localStorage`.
@@ -89,11 +91,13 @@ export default class Search extends Vue {
 .car-search {
   &__content {
     display: flex;
+    gap: 0 40px;
     width: 100%;
   }
 
   &__filters {
     flex-basis: 300px;
+    height: 100%;
   }
 
   &__list {

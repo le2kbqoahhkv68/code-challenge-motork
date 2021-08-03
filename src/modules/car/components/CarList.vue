@@ -33,7 +33,7 @@ export default class CarList extends Vue {
 <style lang="scss">
 .car-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(250px, 300px));
   grid-gap: 15px;
   list-style: none;
 

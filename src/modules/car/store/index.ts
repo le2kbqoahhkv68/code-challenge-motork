@@ -50,7 +50,7 @@ class CarStore extends VuexModule {
   }
 
   // getters
-  public get carsWithSave(): (Car & { saved: boolean })[] {
+  public get computedCars(): (Car & { saved: boolean })[] {
     return this.cars.map((car) => ({
       ...car,
       saved: this.savedCarsId.includes(car.id),

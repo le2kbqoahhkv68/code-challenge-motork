@@ -2,6 +2,7 @@ import { Car } from "@/modules/car/typing/car";
 import CarCard from "@/modules/car/components/CarCard.vue";
 import { mount, Wrapper } from "@vue/test-utils";
 import { getCarStub } from "./stubs/car.stub";
+import { STATUS_FREE, STATUS_SOLD } from "../config/consts";
 
 /**
  * It returns a new wrapper instance of the {@link CarCard} component.
@@ -103,4 +104,15 @@ describe("CarCard component", () => {
     const wrapper = getCarCardWrapper({}, false);
     expect(wrapper.classes("car-card--saved")).toBe(false);
   });
+
+  it("contains the `.car-card--free` class if status is FREE", () => {
+    const wrapper = getCarCardWrapper({ status: STATUS_FREE }, true);
+    expect(wrapper.classes("car-card--free")).toBe(true);
+  });
+
+  it("contains the `.car-card--free` class if status is not FREE", () => {
+    const wrapper = getCarCardWrapper({ status: STATUS_SOLD }, true);
+    expect(wrapper.classes("car-card--free")).toBe(false);
+  });
+
 });

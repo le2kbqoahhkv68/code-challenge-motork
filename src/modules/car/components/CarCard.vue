@@ -19,6 +19,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Car } from "../typing/car";
+import { STATUS_FREE } from "../config/consts";
 
 /**
  * It renders a card with the data from the car property.
@@ -34,6 +35,7 @@ export default class CarCard extends Vue {
   protected get cssClasses(): Record<string, boolean> {
     return {
       "car-card--saved": this.saved,
+      "car-card--free": this.car.status === STATUS_FREE,
     };
   }
 
@@ -57,15 +59,6 @@ export default class CarCard extends Vue {
 
   & > * {
     padding: 0 $side-margin;
-  }
-
-  &--saved {
-    .car-card__heart {
-      .icon {
-        fill: $color-orange;
-        stroke: $color-orange;
-      }
-    }
   }
 
   &__km0 {
@@ -146,7 +139,7 @@ export default class CarCard extends Vue {
   &__heart {
     align-items: center;
     display: flex;
-    border: 1px solid $color-grey-03;
+    border: 1px solid $color-grey-02;
     border-radius: 100%;
     justify-content: center;
     height: 40px;
@@ -154,16 +147,12 @@ export default class CarCard extends Vue {
 
     .icon {
       fill: $color-white;
-      stroke: $color-grey-01;
+      stroke: $color-grey-02;
       transition: stroke 0.25s, fill 0.25s;
     }
 
     &:hover {
-      cursor: pointer;
-
-      .icon {
-        stroke: $color-orange;
-      }
+      cursor: not-allowed;
     }
   }
 
@@ -194,6 +183,35 @@ export default class CarCard extends Vue {
     color: $color-grey-01;
     font-size: 12px;
     margin-top: 6px;
+  }
+
+  &--free {
+    &.car-card {
+      .car-card__heart {
+        border-color: $color-grey-03;
+
+        .icon {
+          stroke: $color-grey-01;
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          .icon {
+            stroke: $color-orange;
+          }
+        }
+      }
+
+      &--saved {
+        .car-card__heart {
+          .icon {
+            fill: $color-orange;
+            stroke: $color-orange;
+          }
+        }
+      }
+    }
   }
 }
 </style>

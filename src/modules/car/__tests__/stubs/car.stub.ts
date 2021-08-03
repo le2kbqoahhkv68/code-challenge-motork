@@ -10,6 +10,7 @@ export const getCarStub: Car = {
   registrationYear: 2021,
   version: "1.4 CRDi 5 porte Go! Plus",
   isKm0: true,
+  status: "FREE",
   consumption: {
     combined: 8.5,
     unitOfMeasure: "l/100km",
@@ -27,6 +28,7 @@ export const getCarsStub: Car[] = [
     price: 20200,
     registrationYear: 2000,
     isKm0: false,
+    status: "FREE",
     consumption: {
       combined: 3.9,
       unitOfMeasure: "l/100km",
@@ -41,6 +43,7 @@ export const getCarsStub: Car[] = [
     price: 27740.55,
     registrationYear: 2020,
     isKm0: false,
+    status: "FREE",
     consumption: {
       combined: 5.1,
       unitOfMeasure: "l/100km",
@@ -55,6 +58,7 @@ export const getCarsStub: Car[] = [
     price: 43500,
     registrationYear: 2019,
     isKm0: false,
+    status: "FREE",
     consumption: {
       combined: 4.5,
       unitOfMeasure: "l/100km",
@@ -69,6 +73,7 @@ export const getCarsStub: Car[] = [
     price: 2845202,
     registrationYear: 2021,
     isKm0: true,
+    status: "FREE",
     consumption: {
       combined: 7.5,
       unitOfMeasure: "l/100km",
@@ -83,6 +88,7 @@ export const getCarsStub: Car[] = [
     price: 17400,
     registrationYear: 2016,
     isKm0: false,
+    status: "SOLD",
     consumption: {
       combined: 3.8,
       unitOfMeasure: "l/100km",
@@ -97,6 +103,7 @@ export const getCarsStub: Car[] = [
     price: 86000,
     registrationYear: 2021,
     isKm0: true,
+    status: "FREE",
     consumption: {
       combined: 8.5,
       unitOfMeasure: "l/100km",
@@ -111,6 +118,7 @@ export const getCarsStub: Car[] = [
     price: 32000,
     registrationYear: 2020,
     isKm0: true,
+    status: "FREE",
     consumption: {
       combined: 3.8,
       unitOfMeasure: "l/100km",

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import { routes as carRoutes } from "@/modules/car";
+import { routes as errorRoutes } from "@/modules/error";
 
 Vue.use(VueRouter);
 
@@ -10,6 +11,11 @@ const routes: Array<RouteConfig> = [
     redirect: { name: "car" },
   },
   ...carRoutes,
+  ...errorRoutes,
+  {
+    path: "*",
+    redirect: { name: "error" },
+  },
 ];
 
 const router = new VueRouter({

@@ -7,6 +7,7 @@ export interface Car {
   price: number;
   isKm0: boolean;
   image: string;
+  status: string;
   consumption: {
     combined: number;
     unitOfMeasure: string;

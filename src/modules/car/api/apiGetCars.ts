@@ -21,6 +21,7 @@ export const apiGetCars = function (): Promise<Car[]> {
           price,
           registrationYear,
           isKm0,
+          status,
           homologationStandard: {
             wltp: { consumption },
           },
@@ -33,6 +34,7 @@ export const apiGetCars = function (): Promise<Car[]> {
           price,
           registrationYear,
           isKm0,
+          status,
           consumption,
         })
       )
