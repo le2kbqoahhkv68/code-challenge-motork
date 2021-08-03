@@ -1,5 +1,5 @@
 <template lang="pug">
-  #car-search
+  #car-search(v-if="cars.length")
     h1 {{ $t("car.search.title") }}
     .car-search__content
       car-filters(class="car-search__filters")
@@ -91,6 +91,7 @@ export default class Search extends Vue {
 .car-search {
   &__content {
     display: flex;
+    justify-content: center;
     gap: 0 40px;
     width: 100%;
   }
@@ -98,10 +99,6 @@ export default class Search extends Vue {
   &__filters {
     flex-basis: 300px;
     height: 100%;
-  }
-
-  &__list {
-    flex: 1;
   }
 }
 </style>
