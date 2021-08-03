@@ -2,8 +2,8 @@
   #car-search(v-if="cars.length")
     h1 {{ $t("car.search.title") }}
     .car-search__content
-      car-filters(class="car-search__filters")
-      car-list(class="car-search__list" :cars="computedCars" @carHeartClick="saveCar")
+      car-filters(class="car-search__filters" @filter="setFilter")
+      car-list(class="car-search__list" :cars="filteredCarList" @carHeartClick="saveCar")
 </template>
 
 <script lang="ts">
@@ -29,21 +29,46 @@ const car = namespace("car");
   },
 })
 export default class Search extends Vue {
+  /**
+   * Filter string which is used to filter the computed list of cars rendered.
+   *
+   * It is used to filter by make, model and version.
+   */
+  filter = "";
+
+  /**
+   * List of cars to conditionally render the view.
+   */
   @car.State
   public cars!: Car[];
 
+  /**
+   * List of saved cars id.
+   */
   @car.State
   public savedCarsId!: Car[];
 
+  /**
+   * Action to retrieve the cars information from the adapter.
+   */
   @car.Action
   public getCars!: () => void;
 
+  /**
+   * It pushes a car id in the state savedCarsId.
+   */
   @car.Mutation
   public saveCar!: (carId: number) => void;
 
+  /**
+   * It sets the complete list of car ids to be saved.
+   */
   @car.Mutation
   public setSavedCars!: (carsId: number[]) => void;
 
+  /**
+   * Computed getter which contains the `save` status of each car.
+   */
   @car.Getter
   public computedCars!: (Car & { saved: boolean })[];
 
@@ -64,6 +89,25 @@ export default class Search extends Vue {
     if (savedCars) {
       this.setSavedCars(JSON.parse(savedCars));
     }
+  }
+
+  /**
+   * It sets filter string with the received from the filters.
+   */
+  setFilter(filter: string): void {
+    this.filter = filter.toLowerCase();
+  }
+
+  /**
+   * It filters the `computedCars` with the filter passed.
+   */
+  protected get filteredCarList(): (Car & { saved: boolean })[] {
+    return this.computedCars.filter(
+      (car) =>
+        car.make.toLowerCase().includes(this.filter) ||
+        car.model.toLowerCase().includes(this.filter) ||
+        car.version?.toLowerCase().includes(this.filter)
+    );
   }
 
   /**

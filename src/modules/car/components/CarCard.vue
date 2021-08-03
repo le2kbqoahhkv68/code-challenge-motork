@@ -9,7 +9,7 @@
       .car-card__price
         .car-card__price-subtitle {{ $t("common.from") }}
         .car-card__price-amount {{ $n(car.price, 'currency') }}
-      .car-card__heart(@click="emitHeartClick")
+      .car-card__heart(@click="emitSave")
         include ../../../assets/icons/heart.svg
     .car-card__detail
       .car-card__detail-year {{ car.registrationYear || "-" }}
@@ -26,12 +26,21 @@ import { STATUS_FREE } from "../config/consts";
  */
 @Component
 export default class CarCard extends Vue {
+  /**
+   * The car.
+   */
   @Prop()
   protected car!: Car;
 
+  /**
+   * True if the car is saved by the user.
+   */
   @Prop({ default: false })
   protected saved!: boolean;
 
+  /**
+   * Computed property with `cssClasses` used to avoid Vue re rendering.
+   */
   protected get cssClasses(): Record<string, boolean> {
     return {
       "car-card--saved": this.saved,
@@ -40,10 +49,12 @@ export default class CarCard extends Vue {
   }
 
   /**
-   * It emits an event with the current car id as payload.
+   * It emits a `save` event with the current car id as payload.
    */
-  emitHeartClick(): void {
-    this.$emit("heartClick", this.car.id);
+  emitSave(): void {
+    if (this.car.status !== STATUS_FREE) {
+      this.$emit("save", this.car.id);
+    }
   }
 }
 </script>

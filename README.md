@@ -27,13 +27,25 @@ Even though these code has to be sent as a zip file, each user story is develope
   - Dumbs component for CarCard and CarList.
   - Search view which contains the business logic and map the state with the dummy components.
 - As a user, I want to save my preferred vehicles and keep them saved if a refresh the page.
+  - Heart icon and styles.
+  - State property to store the ids.
+  - Getter to retrieve the cars and the `save` status.
+  - LocalStorage set and get.
 - As a user, I want to have not free vehicles disabled.
+  - CSS styles.
+  - Disable event.
+  - Constants file. 
 - As a user, I want to be able to show the current KM of the vehicle.
+  - NOT DONE (time).
 - As a user, I want to be able to show the current MILES of the vehicle.
+  - NOT DONE (time).
 - As a user, I want to find vehicles introducing the make, model and version.
+  - Filters component UI.
+  - Input event for filtering the car list.
+  - Computed property returns the filtered car list.
 - As a user, I want to have an error handler of the whole application.
   - Error page.
-  - Notifications.
+  - Notifications. NOT DONE (time). I'd put them in the axios interceptor regarding the response codes of the API.
 
 
 ## Project setup

@@ -3,22 +3,29 @@
     .car-filters__header {{ $t("car.search.filters") }}
     .car-filters__search
       .car-filters__title {{ $t("car.search.search") }}
-      input(class="car-filters__input" type="text")
+      input(class="car-filters__input" type="text" @input="emitFilter")
     .car-filters__unit
       .car-filters__title {{ $t("car.search.unit") }}
       .car-filters__buttons
-        button.car-filters__unit-button.car-filters__unit-button--selected {{ $t("car.search.miles") }}
-        button.car-filters__unit-button {{ $t("car.search.km") }}
+        button(disabled).car-filters__unit-button.car-filters__unit-button--selected {{ $t("car.search.miles") }}
+        button(disabled).car-filters__unit-button {{ $t("car.search.km") }}
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 /**
- * It renders a list of car cards with the data from the cars property.
+ * It renders the filters panel.
  */
 @Component
-export default class Filters extends Vue {}
+export default class Filters extends Vue {
+  /**
+   * It emits a `filter` event with the input as payload.
+   */
+  emitFilter(event: Event): void {
+    this.$emit("filter", (event.target as HTMLInputElement).value);
+  }
+}
 </script>
 
 <style lang="scss">
@@ -74,6 +81,16 @@ export default class Filters extends Vue {}
       border-color: $color-black-02;
       background-color: $color-black-02;
       color: $color-white;
+    }
+
+    &:disabled {
+      background-color: $color-grey-02;
+      border-color: $color-grey-03;
+      color: $color-grey-03;
+
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
 }

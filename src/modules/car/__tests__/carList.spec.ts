@@ -20,17 +20,6 @@ const getCarListWrapper = function (): Wrapper<Vue> {
 };
 
 describe("CarList component", () => {
-  it("doesn't render the list of there are no cars", () => {
-    const wrapper = mount(CarList, {
-      propsData: {
-        cars: [],
-      },
-    });
-
-    expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find(".car-list").exists()).toBe(false);
-  });
-
   it("renders a list of cars", () => {
     const wrapper = getCarListWrapper();
 
